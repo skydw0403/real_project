@@ -1,0 +1,18 @@
+std::cout <<"test09" <<std::endl;
+    RCLCPP_INFO(rclcpp::get_logger("self_drive"),
+                "step=%d, range=%1.2f, linear=%1.2f, angular=%1.2f", step_, scan->ranges[0],
+                vel.linear.x, vel.angular.z);
+    pose_pub_->publish(vel);
+    step_++;
+  }
+  
+};
+
+int main(int argc, char* argv[])
+{
+  rclcpp::init(argc, argv);
+  auto node = std::make_shared<SelfDrive>();
+  rclcpp::spin(node);
+  rclcpp::shutdown();
+  return 0;
+}
